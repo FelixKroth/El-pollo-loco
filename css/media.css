@@ -1,19 +1,38 @@
-@media only screen and (max-width: 760px) {
-    canvas {
-        width: 100%;
-    }
+@media only screen and (max-width: 720px) {
+  canvas {
+    width: 100%;
+  }
 
-    h1 {
-        display: none;
-    }
+  #game-title {
+    display: none;
+  }
 }
 
 @media only screen and (max-height: 480px) {
-    canvas {
-        height: 100vh;
-    }
+  canvas {
+    height: 100vh;
+  }
 
-    h1 {
-        display: none;
-    }
+  #game-title {
+    display: none;
+  }
+
+  #mobile-controls {
+    max-width: 85%;
+    min-width: 70%;
+  }
+}
+
+@media screen and (max-width: 1420px) and (max-height: 1080px) {
+  #mobile-controls {
+    display: flex;
+  }
+
+  #mobile-controls-left {
+    display: flex;
+  }
+
+  #mobile-controls-right {
+    display: flex;
+  }
 }

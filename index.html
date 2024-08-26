@@ -1,32 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
-    <link rel="stylesheet" href="css/fonts.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media.css">
-    <link rel="icon" href="img/pollo-loco-favicon.png">
-    <script src="models/drawable-object.class.js"></script>
-    <script src="models/movable-object.class.js"></script>
-    <script src="models/character.class.js"></script>
-    <script src="models/chicken.class.js"></script>
-    <script src="models/cloud.class.js"></script>
-    <script src="models/status-bar.class.js"></script>
-    <script src="models/world.class.js"></script>
-    <script src="models/background-object.class.js"></script>
-    <script src="models/keyboard.class.js"></script>
-    <script src="models/level.class.js"></script>
-    <script src="models/throwable-object.class.js"></script>
-    <script src="models/endboss.class.js"></script>
-    <script src="levels/level1.js"></script>
-    <script src="js/game.js"></script>
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/media.css" />
+    <link rel="icon" href="img/pollo-loco-favicon.png" />
 </head>
-<body onload="init()">
+<body>
     <section id="game-screen">
-        <h1>El Pollo Loco</h1>
-        <canvas width="720" height="480" id="canvas"></canvas>
+        <section id="start-screen">
+            <img src="/img/start-screen.png" alt="Start Screen" />
+            <button class="scale" id="start-button" onclick="init(); showCanvas();">PLAY</button>
+            <section id="imprint" style="display: none;">
+                <img onclick="toggleImprint()" id="close-icon" src="img/CLOSE.png" alt="Close Icon">
+                <div class="imprint-container">
+                    <h2 id="headline-impressum">Impressum</h2>
+                    <p>Felix Kroth<br />
+                    Im Wingert 24<br />
+                    63801 Kleinostheim</p>
+                    <h2>Kontakt</h2>
+                    <p>E-Mail: <a href="mailto:felix_kroth@web.de">felix_kroth@web.de</a> <br>
+                    Telefon: <a href="tel:01632076800">0163 2076800</a>
+                    </p>
+                    <br>
+                    <h2>Credits</h2>
+                    Wild life icons created by IYIKON - <a href="https://www.flaticon.com/free-icons/wild-life" title="wild life icons">Flaticon</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/mostafaelturkey36-13328910/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Mostafa Elturkey</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/insspirito-1851261/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Garik Barseghyan</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/m20art-14940874/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Alex</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/jorgeribas-1283080/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">jorge luiz ribas</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">Pixabay</a><br>
+                    Bild von <a href="https://de.freepik.com/vektoren-kostenlos/wuestenlandschaft-hintergrund-fuer-videokonferenzen_9892150.htm#from_view=detail_alsolike">freepik</a><br>
+                    Arrow icons created by Freepik - <a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Flaticon</a><br>
+                    Jump icons created by Frey Wazza - <a href="https://www.flaticon.com/free-icons/jump" title="jump icons">Flaticon</a><br>
+                    Throw icons created by Freepik - <a href="https://www.flaticon.com/free-icons/throw" title="throw icons">Flaticon</a><br>
+                    Fullscreen icons created by Vectors Market - <a href="https://www.flaticon.com/free-icons/fullscreen" title="fullscreen icons">Flaticon</a><br>
+                    Mute icons created by Mayor Icons - <a href="https://www.flaticon.com/free-icons/mute" title="mute icons">Flaticon</a><br>
+                    Info icons created by Chanut - <a href="https://www.flaticon.com/free-icons/info" title="info icons">Flaticon</a><br>
+                    Keyboard button icons created by Freepik - <a href="https://www.flaticon.com/free-icons/keyboard-button" title="keyboard button icons">Flaticon</a><br>
+                    <p id="source-impressum">Quelle: <a href="https://www.e-recht24.de">e-recht24.de</a></p>
+                </div>
+            </section>
+            <div id="imprint-footer" onclick="toggleImprint()">IMPRINT</div>
+        </section>
+        <section id="game-display" style="display: none;">
+            <h1 id="game-title">EL POLLO LOCO</h1>
+            <section id="game-controls">
+                <div id="game-controls-container">
+                    <button id="button-controls" class="mobile-button" onclick="toggleInfo()"><img src="img/INFO.png" alt=""></button>
+                    <button id="button-mute" class="mobile-button" onclick="toggleMute()"><img id="button-mute-image" src="img/SOUND-UNMUTE.png"  alt=""></button>
+                    <button id="button-fullscreen" class="mobile-button" onclick="toggleFullscreen()"><img src="img/FULLSCREEN.png" alt=""></button>
+                </div>
+                <div id="dropdown-info" style="display: none;">
+                    <div class="dropdown-item"><img src="img/KEY_LEFT.png" alt="Left Arrow Key"><p>MOVE LEFT</p></div>
+                    <div class="dropdown-item"><img src="img/KEY_RIGHT.png" alt="Right Arrow Key"><p>MOVE RIGHT</p></div>
+                    <div class="dropdown-item"><img src="img/KEY_D.png" alt="D Key"><p>THROW BOTTLE</p></div>
+                    <div class="dropdown-item"><img src="img/KEY_SPACE.png" alt="Space Bar"><p>JUMP</p></div>
+                </div>
+            </section>
+            <canvas width="720" height="480" id="canvas"></canvas>
+            <section id="mobile-controls">
+                <div id="mobile-controls-left">
+                    <button id="button-left" class="mobile-button"><img src="img/LEFT.png" alt=""></button>
+                    <button id="button-right" class="mobile-button"><img src="img/RIGHT.png" alt=""></button>
+                </div>
+                <div id="mobile-controls-right">
+                    <button id="button-throw" class="mobile-button"><img src="img/THROW.png" alt=""></button>
+                    <button id="button-jump" class="mobile-button"><img src="img/JUMP.png" alt=""></button>
+                </div>
+            </section>
+            <div id="imprint-footer-main" onclick="toggleImprintMain()">IMPRINT</div>
+            <section id="imprint-main" style="display: none;">
+                <img onclick="toggleImprintMain()" id="close-icon" src="img/CLOSE.png" alt="Close Icon">
+                <div class="imprint-container">
+                    <h2 id="headline-impressum">Impressum</h2>
+                    <p>Felix Kroth<br />
+                    Im Wingert 24<br />
+                    63801 Kleinostheim</p>
+                    <h2>Kontakt</h2>
+                    <p>E-Mail: <a href="mailto:felix_kroth@web.de">felix_kroth@web.de</a> <br>
+                    Telefon: <a href="tel:01632076800">0163 2076800</a>
+                    </p>
+                    <br>
+                    <h2>Credits</h2>
+                    Wild life icons created by IYIKON - <a href="https://www.flaticon.com/free-icons/wild-life" title="wild life icons">Flaticon</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/mostafaelturkey36-13328910/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Mostafa Elturkey</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/insspirito-1851261/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Garik Barseghyan</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/m20art-14940874/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Alex</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/jorgeribas-1283080/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">jorge luiz ribas</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">Pixabay</a><br>
+                    Bild von <a href="https://de.freepik.com/vektoren-kostenlos/wuestenlandschaft-hintergrund-fuer-videokonferenzen_9892150.htm#from_view=detail_alsolike">freepik</a><br>
+                    Arrow icons created by Freepik - <a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Flaticon</a><br>
+                    Jump icons created by Frey Wazza - <a href="https://www.flaticon.com/free-icons/jump" title="jump icons">Flaticon</a><br>
+                    Throw icons created by Freepik - <a href="https://www.flaticon.com/free-icons/throw" title="throw icons">Flaticon</a><br>
+                    Fullscreen icons created by Vectors Market - <a href="https://www.flaticon.com/free-icons/fullscreen" title="fullscreen icons">Flaticon</a><br>
+                    Mute icons created by Mayor Icons - <a href="https://www.flaticon.com/free-icons/mute" title="mute icons">Flaticon</a><br>
+                    Info icons created by Chanut - <a href="https://www.flaticon.com/free-icons/info" title="info icons">Flaticon</a><br>
+                    Keyboard button icons created by Freepik - <a href="https://www.flaticon.com/free-icons/keyboard-button" title="keyboard button icons">Flaticon</a><br>
+                    <p id="source-impressum">Quelle: <a href="https://www.e-recht24.de">e-recht24.de</a></p>
+                </div>
+            </section>
+        </section>
+        <section id="lose-screen" style="display: none;">
+            <img src="img/lose-screen.png" alt="Lose Screen" />
+            <button class="scale" id="restart-button" onclick="init(); showCanvasRestart();">RESTART</button>
+            <div id="imprint-footer-lose" onclick="toggleImprintLose()">IMPRINT</div>
+            <section id="imprint-lose" style="display: none;">
+                <img onclick="toggleImprintLose()" id="close-icon" src="img/CLOSE.png" alt="Close Icon">
+                <div class="imprint-container">
+                    <h2 id="headline-impressum">Impressum</h2>
+                    <p>Felix Kroth<br />
+                    Im Wingert 24<br />
+                    63801 Kleinostheim</p>
+                    <h2>Kontakt</h2>
+                    <p>E-Mail: <a href="mailto:felix_kroth@web.de">felix_kroth@web.de</a> <br>
+                    Telefon: <a href="tel:01632076800">0163 2076800</a>
+                    </p>
+                    <br>
+                    <h2>Credits</h2>
+                    Wild life icons created by IYIKON - <a href="https://www.flaticon.com/free-icons/wild-life" title="wild life icons">Flaticon</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/mostafaelturkey36-13328910/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Mostafa Elturkey</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/insspirito-1851261/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Garik Barseghyan</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/m20art-14940874/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Alex</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/jorgeribas-1283080/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">jorge luiz ribas</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">Pixabay</a><br>
+                    Bild von <a href="https://de.freepik.com/vektoren-kostenlos/wuestenlandschaft-hintergrund-fuer-videokonferenzen_9892150.htm#from_view=detail_alsolike">freepik</a><br>
+                    Arrow icons created by Freepik - <a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Flaticon</a><br>
+                    Jump icons created by Frey Wazza - <a href="https://www.flaticon.com/free-icons/jump" title="jump icons">Flaticon</a><br>
+                    Throw icons created by Freepik - <a href="https://www.flaticon.com/free-icons/throw" title="throw icons">Flaticon</a><br>
+                    Fullscreen icons created by Vectors Market - <a href="https://www.flaticon.com/free-icons/fullscreen" title="fullscreen icons">Flaticon</a><br>
+                    Mute icons created by Mayor Icons - <a href="https://www.flaticon.com/free-icons/mute" title="mute icons">Flaticon</a><br>
+                    Info icons created by Chanut - <a href="https://www.flaticon.com/free-icons/info" title="info icons">Flaticon</a><br>
+                    Keyboard button icons created by Freepik - <a href="https://www.flaticon.com/free-icons/keyboard-button" title="keyboard button icons">Flaticon</a><br>
+                    <p id="source-impressum">Quelle: <a href="https://www.e-recht24.de">e-recht24.de</a></p>
+                </div>
+            </section>
+        </section>
+        <section id="win-screen" style="display: none;">
+            <img src="img/win-screen.png" alt="Win Screen" />
+            <button class="scale" id="replay-button" onclick="init(); showCanvasReplay();">REPLAY</button>
+            <div id="imprint-footer-win" onclick="toggleImprintWin()">IMPRINT</div>
+            <section id="imprint-win" style="display: none;">
+                <img onclick="toggleImprintWin()" id="close-icon" src="img/CLOSE.png" alt="Close Icon">
+                <div class="imprint-container">
+                    <h2 id="headline-impressum">Impressum</h2>
+                    <p>Felix Kroth<br />
+                    Im Wingert 24<br />
+                    63801 Kleinostheim</p>
+                    <h2>Kontakt</h2>
+                    <p>E-Mail: <a href="mailto:felix_kroth@web.de">felix_kroth@web.de</a> <br>
+                    Telefon: <a href="tel:01632076800">0163 2076800</a>
+                    </p>
+                    <br>
+                    <h2>Credits</h2>
+                    Wild life icons created by IYIKON - <a href="https://www.flaticon.com/free-icons/wild-life" title="wild life icons">Flaticon</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/mostafaelturkey36-13328910/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Mostafa Elturkey</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4697018">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/insspirito-1851261/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Garik Barseghyan</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7631482">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/m20art-14940874/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Alex</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=4779167">Pixabay</a><br>
+                    Bild von <a href="https://pixabay.com/de/users/jorgeribas-1283080/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">jorge luiz ribas</a> auf <a href="https://pixabay.com/de//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1049943">Pixabay</a><br>
+                    Bild von <a href="https://de.freepik.com/vektoren-kostenlos/wuestenlandschaft-hintergrund-fuer-videokonferenzen_9892150.htm#from_view=detail_alsolike">freepik</a><br>
+                    Arrow icons created by Freepik - <a href="https://www.flaticon.com/free-icons/arrow" title="arrow icons">Flaticon</a><br>
+                    Jump icons created by Frey Wazza - <a href="https://www.flaticon.com/free-icons/jump" title="jump icons">Flaticon</a><br>
+                    Throw icons created by Freepik - <a href="https://www.flaticon.com/free-icons/throw" title="throw icons">Flaticon</a><br>
+                    Fullscreen icons created by Vectors Market - <a href="https://www.flaticon.com/free-icons/fullscreen" title="fullscreen icons">Flaticon</a><br>
+                    Mute icons created by Mayor Icons - <a href="https://www.flaticon.com/free-icons/mute" title="mute icons">Flaticon</a><br>
+                    Info icons created by Chanut - <a href="https://www.flaticon.com/free-icons/info" title="info icons">Flaticon</a><br>
+                    Keyboard button icons created by Freepik - <a href="https://www.flaticon.com/free-icons/keyboard-button" title="keyboard button icons">Flaticon</a><br>
+                    <p id="source-impressum">Quelle: <a href="https://www.e-recht24.de">e-recht24.de</a></p>
+                </div>
+            </section>
+        </section>
     </section>
+    <div id="rotation" class="rotation"><span>PLEASE ROTATE DEVICE</span></div>
+    <script src="/models/drawable-object.class.js"></script>
+    <script src="/models/movable-object.class.js"></script>
+    <script src="/models/character.class.js"></script>
+    <script src="/models/chicken.class.js"></script>
+    <script src="/models/small-chicken.class.js"></script>
+    <script src="/models/endboss.class.js"></script>
+    <script src="/models/cloud.class.js"></script>
+    <script src="/models/status-bar.class.js"></script>
+    <script src="/models/coin.class.js"></script>
+    <script src="/models/bottle.class.js"></script>
+    <script src="/models/world.class.js"></script>
+    <script src="/models/background-object.class.js"></script>
+    <script src="/models/keyboard.class.js"></script>
+    <script src="/models/level.class.js"></script>
+    <script src="/models/throwable-object.class.js"></script>
+    <script src="/levels/level1.js"></script>
+    <script src="/js/game.js"></script>
 </body>
 </html>
