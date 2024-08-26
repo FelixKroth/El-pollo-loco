@@ -72,7 +72,7 @@ body {
     align-items: center;
     justify-content: center;
     background-size: cover;
-    background-image: url("/img/pollo-loco-bg-desert-sun.jpg");
+    background-image: url("./../img/pollo-loco-bg-desert-sun.jpg");
     background-repeat: no-repeat;
     background-position: center;
   }

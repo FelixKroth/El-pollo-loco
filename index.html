@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Pollo Loco</title>
-    <link rel="stylesheet" href="css/fonts.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/media.css" />
-    <link rel="icon" href="img/pollo-loco-favicon.png" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/media.css" />
+    <link rel="icon" href="./img/pollo-loco-favicon.png" />
 </head>
 <body>
     <section id="game-screen">
         <section id="start-screen">
-            <img src="/img/start-screen.png" alt="Start Screen" />
+            <img src="./img/start-screen.png" alt="Start Screen" />
             <button class="scale" id="start-button" onclick="init(); showCanvas();">PLAY</button>
             <section id="imprint" style="display: none;">
                 <img onclick="toggleImprint()" id="close-icon" src="img/CLOSE.png" alt="Close Icon">
@@ -49,26 +49,26 @@
             <h1 id="game-title">EL POLLO LOCO</h1>
             <section id="game-controls">
                 <div id="game-controls-container">
-                    <button id="button-controls" class="mobile-button" onclick="toggleInfo()"><img src="img/INFO.png" alt=""></button>
-                    <button id="button-mute" class="mobile-button" onclick="toggleMute()"><img id="button-mute-image" src="img/SOUND-UNMUTE.png"  alt=""></button>
-                    <button id="button-fullscreen" class="mobile-button" onclick="toggleFullscreen()"><img src="img/FULLSCREEN.png" alt=""></button>
+                    <button id="button-controls" class="mobile-button" onclick="toggleInfo()"><img src="./img/INFO.png" alt=""></button>
+                    <button id="button-mute" class="mobile-button" onclick="toggleMute()"><img id="button-mute-image" src="./img/SOUND-UNMUTE.png"  alt=""></button>
+                    <button id="button-fullscreen" class="mobile-button" onclick="toggleFullscreen()"><img src="./img/FULLSCREEN.png" alt=""></button>
                 </div>
                 <div id="dropdown-info" style="display: none;">
-                    <div class="dropdown-item"><img src="img/KEY_LEFT.png" alt="Left Arrow Key"><p>MOVE LEFT</p></div>
-                    <div class="dropdown-item"><img src="img/KEY_RIGHT.png" alt="Right Arrow Key"><p>MOVE RIGHT</p></div>
-                    <div class="dropdown-item"><img src="img/KEY_D.png" alt="D Key"><p>THROW BOTTLE</p></div>
-                    <div class="dropdown-item"><img src="img/KEY_SPACE.png" alt="Space Bar"><p>JUMP</p></div>
+                    <div class="dropdown-item"><img src="./img/KEY_LEFT.png" alt="Left Arrow Key"><p>MOVE LEFT</p></div>
+                    <div class="dropdown-item"><img src="./img/KEY_RIGHT.png" alt="Right Arrow Key"><p>MOVE RIGHT</p></div>
+                    <div class="dropdown-item"><img src="./img/KEY_D.png" alt="D Key"><p>THROW BOTTLE</p></div>
+                    <div class="dropdown-item"><img src="./img/KEY_SPACE.png" alt="Space Bar"><p>JUMP</p></div>
                 </div>
             </section>
             <canvas width="720" height="480" id="canvas"></canvas>
             <section id="mobile-controls">
                 <div id="mobile-controls-left">
-                    <button id="button-left" class="mobile-button"><img src="img/LEFT.png" alt=""></button>
-                    <button id="button-right" class="mobile-button"><img src="img/RIGHT.png" alt=""></button>
+                    <button id="button-left" class="mobile-button"><img src="./img/LEFT.png" alt=""></button>
+                    <button id="button-right" class="mobile-button"><img src="./img/RIGHT.png" alt=""></button>
                 </div>
                 <div id="mobile-controls-right">
-                    <button id="button-throw" class="mobile-button"><img src="img/THROW.png" alt=""></button>
-                    <button id="button-jump" class="mobile-button"><img src="img/JUMP.png" alt=""></button>
+                    <button id="button-throw" class="mobile-button"><img src="./img/THROW.png" alt=""></button>
+                    <button id="button-jump" class="mobile-button"><img src="./img/JUMP.png" alt=""></button>
                 </div>
             </section>
             <div id="imprint-footer-main" onclick="toggleImprintMain()">IMPRINT</div>
@@ -103,7 +103,7 @@
             </section>
         </section>
         <section id="lose-screen" style="display: none;">
-            <img src="img/lose-screen.png" alt="Lose Screen" />
+            <img src="./img/lose-screen.png" alt="Lose Screen" />
             <button class="scale" id="restart-button" onclick="init(); showCanvasRestart();">RESTART</button>
             <div id="imprint-footer-lose" onclick="toggleImprintLose()">IMPRINT</div>
             <section id="imprint-lose" style="display: none;">
@@ -137,11 +137,11 @@
             </section>
         </section>
         <section id="win-screen" style="display: none;">
-            <img src="img/win-screen.png" alt="Win Screen" />
+            <img src="./img/win-screen.png" alt="Win Screen" />
             <button class="scale" id="replay-button" onclick="init(); showCanvasReplay();">REPLAY</button>
             <div id="imprint-footer-win" onclick="toggleImprintWin()">IMPRINT</div>
             <section id="imprint-win" style="display: none;">
-                <img onclick="toggleImprintWin()" id="close-icon" src="img/CLOSE.png" alt="Close Icon">
+                <img onclick="toggleImprintWin()" id="close-icon" src="./img/CLOSE.png" alt="Close Icon">
                 <div class="imprint-container">
                     <h2 id="headline-impressum">Impressum</h2>
                     <p>Felix Kroth<br />
@@ -172,22 +172,22 @@
         </section>
     </section>
     <div id="rotation" class="rotation"><span>PLEASE ROTATE DEVICE</span></div>
-    <script src="/models/drawable-object.class.js"></script>
-    <script src="/models/movable-object.class.js"></script>
-    <script src="/models/character.class.js"></script>
-    <script src="/models/chicken.class.js"></script>
-    <script src="/models/small-chicken.class.js"></script>
-    <script src="/models/endboss.class.js"></script>
-    <script src="/models/cloud.class.js"></script>
-    <script src="/models/status-bar.class.js"></script>
-    <script src="/models/coin.class.js"></script>
-    <script src="/models/bottle.class.js"></script>
-    <script src="/models/world.class.js"></script>
-    <script src="/models/background-object.class.js"></script>
-    <script src="/models/keyboard.class.js"></script>
-    <script src="/models/level.class.js"></script>
-    <script src="/models/throwable-object.class.js"></script>
-    <script src="/levels/level1.js"></script>
-    <script src="/js/game.js"></script>
+    <script src="./models/drawable-object.class.js"></script>
+    <script src="./models/movable-object.class.js"></script>
+    <script src="./models/character.class.js"></script>
+    <script src="./models/chicken.class.js"></script>
+    <script src="./models/small-chicken.class.js"></script>
+    <script src="./models/endboss.class.js"></script>
+    <script src="./models/cloud.class.js"></script>
+    <script src="./models/status-bar.class.js"></script>
+    <script src="./models/coin.class.js"></script>
+    <script src="./models/bottle.class.js"></script>
+    <script src="./models/world.class.js"></script>
+    <script src="./models/background-object.class.js"></script>
+    <script src="./models/keyboard.class.js"></script>
+    <script src="./models/level.class.js"></script>
+    <script src="./models/throwable-object.class.js"></script>
+    <script src="./levels/level1.js"></script>
+    <script src="./js/game.js"></script>
 </body>
 </html>
